@@ -51,5 +51,29 @@ app.MapGet("/api/users/search", (int? id) =>
     });
 });
 
+// post
+app.MapPost("/api/users", (User user) =>
+{
+    if (string.IsNullOrWhiteSpace(user.Name))
+    {
+        return Results.BadRequest(new { error = "Имя обязательно" });
+    }
+
+    if (user.Age <= 0)
+    {
+        return Results.BadRequest(new { error = "Возраст должен быть положительным" });
+    }
+
+    user.Id = users.Any() ? users.Max(u => u.Id) + 1 : 1;
+
+    users.Add(user);
+
+    return Results.Created($"/api/users/{user.Id}", new
+    {
+        message = "Пользователь успешно создан",
+        data = user
+    });
+});
+
 
 app.Run();
