@@ -40,5 +40,25 @@ app.MapGet("api/json", () =>
     return Results.Json(data);
 });
 
+// xml
+app.MapGet("/api/xml", () =>
+{
+    var xml = """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <response>
+            <message>это XML-ответ от сервера</message>
+            <value>1234567890</value>
+            <items>
+                <id>1</id>
+                <item>пупу</item>
+                <item>пупу</item>
+            </items>
+        </response>
+        """;
+    return Results.Content(xml, "application/xml; charset=utf-8");
+});
+
+
+
 app.Run();
 
