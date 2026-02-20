@@ -81,5 +81,19 @@ app.MapGet("/api/binary", () =>
     return Results.Bytes(data, "application/octet-stream", "data.bin");
 });
 
+// image
+app.MapGet("/api/image", async (HttpContext context) =>
+{
+    var imagePath = "pics and pdf/3a38a0cce3cfc3857a3543fb3795b1fb.jpg";
+
+    if (!File.Exists(imagePath))
+    {
+        return Results.NotFound(new { error = "Изображение не найдено" });
+    }
+
+    var imageBytes = await File.ReadAllBytesAsync(imagePath);
+    return Results.File(imageBytes, "image/png", "image.png");
+});
+
 app.Run();
 
