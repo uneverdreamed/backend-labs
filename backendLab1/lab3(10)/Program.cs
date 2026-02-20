@@ -1,4 +1,6 @@
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -17,6 +19,12 @@ app.MapGet("/api/html", () =>
         </html>
         """;
     return Results.Content(html, "text/html");
+});
+
+// text
+app.MapGet("/api/text", () =>
+{
+    return Results.Content("это текстовый ответ от сервера. пупупу", "text/plain; charset=utf-8");
 });
 
 app.Run();
