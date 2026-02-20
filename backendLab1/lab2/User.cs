@@ -8,4 +8,11 @@
         public string Email { get; set; } = string.Empty;
 
     }
+
+    public class UserPatch
+    {
+        public string? Name { get; set; }
+        public int? Age { get; set; }
+        public string? Email { get; set; }
+    }
 }
