@@ -20,4 +20,16 @@ var users = new List<User>
 
 };
 
+// get 
+app.MapGet("api/users", () =>
+{
+    return Results.Ok(new
+    {
+        message = "Список всех пользователей",
+        count = users.Count,
+        data = users
+    });
+});
+
+
 app.Run();
