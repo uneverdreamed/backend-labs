@@ -62,13 +62,16 @@ app.MapGet("/api/xml", () =>
 app.MapGet("/api/csv", () =>
 {
     var csv = new StringBuilder();
-    csv.AppendLine("id,name,age");
-    csv.AppendLine("1,пупу,11");
-    csv.AppendLine("2,пупу,22");
-    csv.AppendLine("3,пупу,33");
-    csv.AppendLine("4,пупу,44");
+    csv.AppendLine("id;name;age");
+    csv.AppendLine("1;пупу;11");
+    csv.AppendLine("2;пупу;22");
+    csv.AppendLine("3;пупу;33");
+    csv.AppendLine("4;пупу;44");
 
-    return Results.Content(csv.ToString(), "text/csv; charset=utf-8");
+    var bom = Encoding.UTF8.GetPreamble();
+    var csvBytes = bom.Concat(Encoding.UTF8.GetBytes(csv.ToString())).ToArray();
+
+    return Results.Bytes(csvBytes, "text/csv; charset=utf-8", "pupupu.csv");
 });
 
 app.Run();
