@@ -27,5 +27,18 @@ app.MapGet("/api/text", () =>
     return Results.Content("это текстовый ответ от сервера. пупупу", "text/plain; charset=utf-8");
 });
 
+
+// json
+app.MapGet("api/json", () =>
+{
+    var data = new
+    {
+        message = "это JSON-ответ от сервера",
+        value = 1234567890,
+        items = new[] { "пупу", "пупу", "пупу" }
+    };
+    return Results.Json(data);
+});
+
 app.Run();
 
