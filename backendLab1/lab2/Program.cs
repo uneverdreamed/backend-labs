@@ -31,5 +31,25 @@ app.MapGet("api/users", () =>
     });
 });
 
+app.MapGet("/api/users/search", (int? id) =>
+{
+    if (id == null)
+    {
+        return Results.BadRequest(new { message = "Параметр id не указан" });
+    }
+
+    var user = users.FirstOrDefault(u => u.Id == id);
+    if (user == null)
+    {
+        return Results.NotFound(new { message = $"Пользователь с id {id} не найден" });
+    }
+
+    return Results.Ok(new
+    {
+        message = $"Пользователь с id {id} найден",
+        data = user
+    });
+});
+
 
 app.Run();
