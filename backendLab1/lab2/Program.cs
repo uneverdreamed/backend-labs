@@ -4,6 +4,12 @@ using System.Text.Unicode;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic);
+    options.SerializerOptions.WriteIndented = true;
+});
+
 var app = builder.Build();
 
 var users = new List<User>
