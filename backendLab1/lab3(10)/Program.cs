@@ -109,5 +109,11 @@ app.MapGet("/api/pdf", async () =>
     return Results.File(pdfBytes, "application/pdf", "document.pdf");
 });
 
+// перенаправление
+app.MapGet("/api/redirect", () =>
+{
+    return Results.Redirect("https://github.com/uneverdreamed");
+});
+
 app.Run();
 
