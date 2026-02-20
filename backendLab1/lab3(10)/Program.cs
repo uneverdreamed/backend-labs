@@ -58,7 +58,18 @@ app.MapGet("/api/xml", () =>
     return Results.Content(xml, "application/xml; charset=utf-8");
 });
 
+// csv
+app.MapGet("/api/csv", () =>
+{
+    var csv = new StringBuilder();
+    csv.AppendLine("id,name,age");
+    csv.AppendLine("1,пупу,11");
+    csv.AppendLine("2,пупу,22");
+    csv.AppendLine("3,пупу,33");
+    csv.AppendLine("4,пупу,44");
 
+    return Results.Content(csv.ToString(), "text/csv; charset=utf-8");
+});
 
 app.Run();
 
