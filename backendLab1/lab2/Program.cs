@@ -100,5 +100,28 @@ app.MapPost("/api/users/register", (string category, User user) =>
     });
 });
 
+// put
+app.MapPut("api/users/{id}", (int id, User updatedUser) =>
+{ 
+    var user = users.FirstOrDefault(u => u.Id == id);
+    if (user == null)
+    {
+        return Results.NotFound(new {error = $"Пользователь с id {id} не найден" });
+    }
+
+    if (string.IsNullOrWhiteSpace(updatedUser.Name))
+    {
+        return Results.BadRequest(new { error = "Имя обязательно" });
+    }
+    user.Name = updatedUser.Name;
+    user.Age = updatedUser.Age;
+    user.Email = updatedUser.Email;
+
+    return Results.Ok(new
+    {
+        message = "Пользователь полностью обновлен",
+        data = user
+    });
+});
 
 app.Run();
