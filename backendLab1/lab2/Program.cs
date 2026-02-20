@@ -75,6 +75,8 @@ app.MapPost("/api/users", (User user) =>
     });
 });
 
+// post ñ query è body
+
 app.MapPost("/api/users/register", (string category, User user) =>
 {
     if (string.IsNullOrWhiteSpace(category))
