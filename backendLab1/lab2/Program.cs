@@ -124,4 +124,43 @@ app.MapPut("api/users/{id}", (int id, User updatedUser) =>
     });
 });
 
+
+// patch
+app.MapPatch("/api/users/{id}", (int id, UserPatch patch) =>
+{
+var user = users.FirstOrDefault(u => u.Id == id);
+
+if (user == null)
+{
+    return Results.NotFound(new { error = $"Пользователь с id={id} не найден" });
+}
+
+    if (patch.Name != null)
+    {
+        user.Name = patch.Name;
+    }
+
+    if (patch.Age.HasValue)
+    {
+        user.Age = patch.Age.Value;
+    }
+
+    if (patch.Email != null)
+    {
+        user.Email = patch.Email;
+    }
+
+    return Results.Ok(new
+    {
+        message = "Пользователь частично обновлен",
+        updatedFields = new
+        {
+            name = patch.Name != null,
+            age = patch.Age.HasValue,
+            email = patch.Email != null
+        },
+        data = user
+    });
+});
+
 app.Run();
