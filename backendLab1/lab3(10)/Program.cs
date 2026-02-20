@@ -74,5 +74,12 @@ app.MapGet("/api/csv", () =>
     return Results.Bytes(csvBytes, "text/csv; charset=utf-8", "pupupu.csv");
 });
 
+// application/octet-stream
+app.MapGet("/api/binary", () =>
+{
+    var data = new byte[] { 0x48, 0x65, 0x6C, 0x6C, 0x6F }; // hello
+    return Results.Bytes(data, "application/octet-stream", "data.bin");
+});
+
 app.Run();
 
