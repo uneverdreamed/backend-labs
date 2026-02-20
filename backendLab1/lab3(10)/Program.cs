@@ -95,5 +95,19 @@ app.MapGet("/api/image", async (HttpContext context) =>
     return Results.File(imageBytes, "image/png", "image.png");
 });
 
+// pdf
+app.MapGet("/api/pdf", async () =>
+{
+    var pdfPath = "pics and pdf/pdf_answer.pdf";
+
+    if (!File.Exists(pdfPath))
+    {
+        return Results.NotFound(new { error = "PDF-файл не найден" });
+    }
+
+    var pdfBytes = await File.ReadAllBytesAsync(pdfPath);
+    return Results.File(pdfBytes, "application/pdf", "document.pdf");
+});
+
 app.Run();
 
