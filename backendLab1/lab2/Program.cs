@@ -75,5 +75,28 @@ app.MapPost("/api/users", (User user) =>
     });
 });
 
+app.MapPost("/api/users/register", (string category, User user) =>
+{
+    if (string.IsNullOrWhiteSpace(category))
+    {
+        return Results.BadRequest(new { error = "Параметр category обязателен" });
+    }
+
+    if (string.IsNullOrWhiteSpace(user.Name))
+    {
+        return Results.BadRequest(new { error = "Имя обязательно" });
+    }
+
+    user.Id = users.Any() ? users.Max(u => u.Id) + 1 : 1;
+    users.Add(user);
+
+    return Results.Created($"/api/users/{user.Id}", new
+    {
+        message = $"Пользователь зарегистрирован в категории '{category}'",
+        category = category,
+        data = user
+    });
+});
+
 
 app.Run();
