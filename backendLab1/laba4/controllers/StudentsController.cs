@@ -15,12 +15,15 @@ namespace laba4.controllers
         };
         
         private static int _nextId = 4;
+
+        // GET получение всех студентов
         [HttpGet]
         public ActionResult<IEnumerable<Student>> GetAll()
         {
             return Ok(_students);
         }
 
+        // GET получение одного студента
         [HttpGet("{id}")]
         public ActionResult<Student> GetById(int id)
         {
@@ -32,6 +35,8 @@ namespace laba4.controllers
             return Ok(student);
         }
 
+
+        // POST создание студента
         [HttpPost]
         public ActionResult<Student> Create([FromBody] CreateStudentDto dto)
         {
@@ -48,6 +53,8 @@ namespace laba4.controllers
             return CreatedAtAction(nameof(GetById), new { id = student.Id }, student);
         }
 
+
+        // PUT обновление студента
         [HttpPut("{id}")]
         public ActionResult<Student> Update(int id, [FromBody] UpdateStudentDto dto)
         {
@@ -62,6 +69,8 @@ namespace laba4.controllers
             return Ok(student);
         }
 
+
+        // DELETE удаление студента
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
