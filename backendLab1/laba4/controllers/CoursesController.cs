@@ -95,6 +95,17 @@ namespace laba4.controllers
             return Ok(course);
         }
 
+        // DELETE api/courses/{id:int}
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var course = _courses.FirstOrDefault(c => c.Id == id);
+            if (course == null)
+                return NotFound(new { message = $"Курс с id={id} не найден" });
+
+            _courses.Remove(course);
+            return NoContent();
+        }
 
     }
 }
