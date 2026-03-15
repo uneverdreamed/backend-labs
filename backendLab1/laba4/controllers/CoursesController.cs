@@ -70,5 +70,15 @@ namespace laba4.controllers
             var result = _courses.Where(c => c.Year == year).ToList();
             return Ok(new { year, data = result });
         }
+
+        // POST api/courses
+        [HttpPost]
+        public ActionResult<Course> Create([FromBody] Course course)
+        {
+            course.Id = _nextId++;
+            course.Guid = Guid.NewGuid();
+            _courses.Add(course);
+            return CreatedAtAction(nameof(GetById), new { id = course.Id }, course);
+        }
     }
 }
