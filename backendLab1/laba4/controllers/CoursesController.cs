@@ -9,9 +9,9 @@ namespace laba4.controllers
     {
         private static readonly List<Course> _courses = new()
         {
-            new Course { Id = 1, Name = "Backend-разработка", Slug = "back-13672", Year = 2024, Guid = Guid.NewGuid() },
+            new Course { Id = 1, Name = "Backend-разработка", Slug = "back-13672", Year = 2020, Guid = Guid.NewGuid() },
             new Course { Id = 2, Name = "Шаблоны проектирования", Slug = "despatterns-13377", Year = 2025, Guid = Guid.NewGuid() },
-            new Course { Id = 3, Name = "Веб-программирование и дизайн", Slug = "webdev-13533", Year = 2026, Guid = Guid.NewGuid() }
+            new Course { Id = 3, Name = "Веб-программирование и дизайн", Slug = "webdev-13533", Year = 2019, Guid = Guid.NewGuid() }
         };
 
         private static int _nextId = 4;
@@ -61,6 +61,14 @@ namespace laba4.controllers
                 return NotFound(new { message = $"Курс со slug='{slug}' не найден" });
 
             return Ok(course);
+        }
+
+        // GET api/courses/by-year/{year:int}
+        [HttpGet("by-year/{year:int}")]
+        public ActionResult GetByYear(int year)
+        {
+            var result = _courses.Where(c => c.Year == year).ToList();
+            return Ok(new { year, data = result });
         }
     }
 }
