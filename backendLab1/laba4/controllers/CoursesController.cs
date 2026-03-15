@@ -15,5 +15,30 @@ namespace laba4.controllers
         };
 
         private static int _nextId = 4;
+
+        // GET api/courses
+        [HttpGet]
+        public ActionResult GetAll(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string sort = "id",
+            [FromQuery] int? year = null)
+        {
+            var query = _courses.AsEnumerable();
+
+            if (year.HasValue)
+                query = query.Where(c => c.Year == year.Value);
+
+            query = sort.ToLower() switch
+            {
+                "name" => query.OrderBy(c => c.Name),
+                "year" => query.OrderBy(c => c.Year),
+                _ => query.OrderBy(c => c.Id)
+            };
+
+            var result = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return Ok(new { page, pageSize, sort, year, totalCount = _courses.Count, data = result });
+        }
     }
 }
