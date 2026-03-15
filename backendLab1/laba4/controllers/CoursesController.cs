@@ -80,5 +80,21 @@ namespace laba4.controllers
             _courses.Add(course);
             return CreatedAtAction(nameof(GetById), new { id = course.Id }, course);
         }
+
+        // PUT api/courses/{id:int}
+        [HttpPut("{id:int}")]
+        public ActionResult<Course> Update(int id, [FromBody] Course updated)
+        {
+            var course = _courses.FirstOrDefault(c => c.Id == id);
+            if (course == null)
+                return NotFound(new { message = $"Курс с id={id} не найден" });
+
+            course.Name = updated.Name;
+            course.Slug = updated.Slug;
+            course.Year = updated.Year;
+            return Ok(course);
+        }
+
+
     }
 }
