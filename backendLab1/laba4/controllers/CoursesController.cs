@@ -9,9 +9,11 @@ namespace laba4.controllers
     {
         private static readonly List<Course> _courses = new()
         {
-            new Course { Id = 13672, Name = "Backend-разработка", Slug = "back-1372", Year = 2024, Guid = Guid.NewGuid() },
-            new Course { Id = 13377, Name = "Шаблоны проектирования", Slug = "despatterns-1377", Year = 2025, Guid = Guid.NewGuid() },
-            new Course { Id = 13533, Name = "Веб-программирование и дизайн", Slug = "webdev-1333", Year = 2026, Guid = Guid.NewGuid() }
-        };  
+            new Course { Id = 1, Name = "Backend-разработка", Slug = "back-13672", Year = 2024, Guid = Guid.NewGuid() },
+            new Course { Id = 2, Name = "Шаблоны проектирования", Slug = "despatterns-13377", Year = 2025, Guid = Guid.NewGuid() },
+            new Course { Id = 3, Name = "Веб-программирование и дизайн", Slug = "webdev-13533", Year = 2026, Guid = Guid.NewGuid() }
+        };
+
+        private static int _nextId = 4;
     }
 }
