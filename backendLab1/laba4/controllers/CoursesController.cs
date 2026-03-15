@@ -51,5 +51,16 @@ namespace laba4.controllers
 
             return Ok(course);
         }
+
+        // GET api/courses/by-slug/{slug:minlength(5)}
+        [HttpGet("by-slug/{slug:minlength(5)}")]
+        public ActionResult<Course> GetBySlug(string slug)
+        {
+            var course = _courses.FirstOrDefault(c => c.Slug == slug);
+            if (course == null)
+                return NotFound(new { message = $"Курс со slug='{slug}' не найден" });
+
+            return Ok(course);
+        }
     }
 }
