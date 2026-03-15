@@ -9,9 +9,19 @@ namespace laba4.controllers
     {
         private static readonly List<Student> _students = new()
         {
-            new Student { Id = 1, Name = "Иванов Иван", Group = "241-333", CreatedAt = DateTime.UtcNow },
-            new Student { Id = 2, Name = "Петров Петр", Group = "241-332", CreatedAt = DateTime.UtcNow },
-            new Student { Id = 3, Name = "Николаев Николай", Group = "241-331", CreatedAt = DateTime.UtcNow }
+            new Student { Id = 1, Name = "Иванов Иван", Group = "241-333", CreatedAt = DateTime.UtcNow,
+            Courses = new List<Course>
+                {
+                    new Course { Id = 1, Name = "Backend-разработка", Slug = "back-13672", Year = 2020, Guid = Guid.NewGuid() },
+                    new Course { Id = 2, Name = "Шаблоны проектирования", Slug = "despatterns-13377", Year = 2025, Guid = Guid.NewGuid() }
+                }},
+            new Student { Id = 2, Name = "Петров Петр", Group = "241-332", CreatedAt = DateTime.UtcNow,
+            Courses = new List<Course>
+                { new Course {Id = 3, Name = "Веб-программирование и дизайн", Slug = "webdev-13533", Year = 2019, Guid = Guid.NewGuid() }
+            } },
+            new Student { Id = 3, Name = "Николаев Николай", Group = "241-331", CreatedAt = DateTime.UtcNow,
+            Courses = new List<Course>()
+            }
         };
         
         private static int _nextId = 4;
