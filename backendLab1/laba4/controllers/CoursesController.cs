@@ -40,5 +40,16 @@ namespace laba4.controllers
 
             return Ok(new { page, pageSize, sort, year, totalCount = _courses.Count, data = result });
         }
+
+        // GET api/courses/{id:int}
+        [HttpGet("{id:int}")]
+        public ActionResult<Course> GetById(int id)
+        {
+            var course = _courses.FirstOrDefault(c => c.Id == id);
+            if (course == null)
+                return NotFound(new { message = $"Курс с id={id} не найден" });
+
+            return Ok(course);
+        }
     }
 }
