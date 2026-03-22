@@ -1,6 +1,6 @@
 ﻿namespace laba6.models
 {
-    public class student
+    public class Student
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
