@@ -13,7 +13,7 @@ namespace laba6.Repositories
             new Student { Id = 4, Name = "Полинова Полина", Group = "241-333", CreatedAt= DateTime.UtcNow }
         };
 
-        private static int _nextId = 4;
+        private static int _nextId = 5;
 
         public IEnumerable<Student> GetAll()
         {
