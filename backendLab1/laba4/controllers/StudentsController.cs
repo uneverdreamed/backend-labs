@@ -131,7 +131,7 @@ namespace laba4.controllers
         public ActionResult GetOptional(int? id = null)
         {
             if (id == null)
-                return Ok(new { message = "id не передан, возвращаем всех студентов", data = _students });
+                return Ok(new { message = "id не передан, возврат всех студентов", data = _students });
 
             var student = _students.FirstOrDefault(s => s.Id == id);
             if (student == null)
