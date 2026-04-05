@@ -6,6 +6,6 @@
 
     btn.addEventListener('click', function () {
         count++;
-        output.textContent = `Кнопка нажата ${count} раз(а). JavaScript работает!`;
+        output.textContent = `Кнопка нажата ${count} раз`;
     });
 });
