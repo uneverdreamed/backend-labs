@@ -1,0 +1,26 @@
+{
+  "project": "laba8",
+  "description": "Статические файлы в ASP.NET Core",
+  "files": [
+    {
+      "type": "html",
+      "path": "/index.html"
+    },
+    {
+      "type": "css",
+      "path": "/css/styles.css"
+    },
+    {
+      "type": "js",
+      "path": "/js/script.js"
+    },
+    {
+      "type": "html",
+      "path": "/pages/about.html"
+    },
+    {
+      "type": "json",
+      "path": "/data/info.json"
+    }
+  ]
+}
