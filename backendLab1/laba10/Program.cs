@@ -61,7 +61,7 @@ app.MapGet("/log/demo", (ILogger<Program> logger) =>
 // GET /log/info логирование с параметрами (structured logging)
 app.MapGet("/log/info", (ILogger<Program> logger) =>
 {
-    var userId = 42;
+    var userId = 323232;
     var action = "просмотр списка";
 
     logger.LogInformation("Пользователь {UserId} выполнил действие: {Action}", userId, action);
