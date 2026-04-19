@@ -1,5 +1,6 @@
 ﻿using laba11.data;
 using laba11.Models;
+using laba11.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,8 +46,14 @@ namespace laba11.controllers
 
         // POST api/courses
         [HttpPost]
-        public async Task<ActionResult<Course>> Create([FromBody] Course course)
+        public async Task<ActionResult<Course>> Create([FromBody] CreateCourseDto dto)
         {
+            var course = new Course
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                Credits = dto.Credits
+            };
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById), new { id = course.Id }, course);
@@ -54,17 +61,14 @@ namespace laba11.controllers
 
         // PUT api/courses/{id}
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Course>> Update(int id, [FromBody] Course updated)
+        public async Task<ActionResult<Course>> Update(int id, [FromBody] CreateCourseDto dto)
         {
             var course = await _context.Courses.FindAsync(id);
-
             if (course == null)
                 return NotFound(new { message = $"Курс с id={id} не найден" });
-
-            course.Name = updated.Name;
-            course.Description = updated.Description;
-            course.Credits = updated.Credits;
-
+            course.Name = dto.Name;
+            course.Description = dto.Description;
+            course.Credits = dto.Credits;
             await _context.SaveChangesAsync();
             return Ok(course);
         }
