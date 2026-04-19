@@ -1,4 +1,6 @@
-﻿namespace laba11.Models
+﻿using System.Text.Json.Serialization;
+
+namespace laba11.Models
 {
     public class Student
     {
@@ -6,6 +8,8 @@
         public string Name { get; set; } = string.Empty;
         public string Group { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
+        
+        [JsonIgnore]
         public ICollection<Enroll> Enrolls { get; set; } = new List<Enroll>();
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace laba11.Models
+﻿using System.Text.Json.Serialization;
+
+namespace laba11.Models
 {
     public class Course
     {
@@ -8,6 +10,7 @@
         public int Credits { get; set; }
 
         // навигационное свойство (один курс может иметь много записей студентов)
+        [JsonIgnore]
         public ICollection<Enroll> Enrolls { get; set; } = new List<Enroll>();
     }
 }

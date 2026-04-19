@@ -1,5 +1,6 @@
 ﻿using laba11.data;
 using laba11.Models;
+using laba11.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ namespace laba11.controllers
             _context = context;
         }
 
-        // GET api/enrollments — все записи с данными студентов и курсов
+        // GET api/enrolls — все записи с данными студентов и курсов
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Enroll>>> GetAll()
         {
@@ -45,36 +46,34 @@ namespace laba11.controllers
 
         // POST api/enrollments — записать студента на курс
         [HttpPost]
-        public async Task<ActionResult<Enroll>> Create([FromBody] Enroll enrollment)
+        public async Task<ActionResult<Enroll>> Create([FromBody] CreateEnrollDto dto)
         {
-            // Проверяем существование студента и курса перед созданием записи
-            var studentExists = await _context.Students.AnyAsync(s => s.Id == enrollment.StudentId);
-            var courseExists = await _context.Courses.AnyAsync(c => c.Id == enrollment.CourseId);
-
+            var studentExists = await _context.Students.AnyAsync(s => s.Id == dto.StudentId);
+            var courseExists = await _context.Courses.AnyAsync(c => c.Id == dto.CourseId);
             if (!studentExists)
-                return BadRequest(new { message = $"Студент с id={enrollment.StudentId} не найден" });
-
+                return BadRequest(new { message = $"Студент с id={dto.StudentId} не найден" });
             if (!courseExists)
-                return BadRequest(new { message = $"Курс с id={enrollment.CourseId} не найден" });
-
-            enrollment.EnrolledAt = DateTime.UtcNow;
+                return BadRequest(new { message = $"Курс с id={dto.CourseId} не найден" });
+            var enrollment = new Enroll
+            {
+                StudentId = dto.StudentId,
+                CourseId = dto.CourseId,
+                Grade = dto.Grade,
+                EnrolledAt = DateTime.UtcNow
+            };
             _context.Enrolls.Add(enrollment);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction(nameof(GetById), new { id = enrollment.Id }, enrollment);
         }
 
         // PUT api/enrollments/{id} — обновить оценку
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Enroll>> Update(int id, [FromBody] Enroll updated)
+        public async Task<ActionResult<Enroll>> Update(int id, [FromBody] UpdateEnrollDto dto)
         {
             var enrollment = await _context.Enrolls.FindAsync(id);
-
             if (enrollment == null)
                 return NotFound(new { message = $"Запись с id={id} не найдена" });
-
-            enrollment.Grade = updated.Grade;
-
+            enrollment.Grade = dto.Grade;
             await _context.SaveChangesAsync();
             return Ok(enrollment);
         }
