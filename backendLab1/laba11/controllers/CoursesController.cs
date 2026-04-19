@@ -3,7 +3,7 @@ using laba11.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace lab11.Controllers
+namespace lab11.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
