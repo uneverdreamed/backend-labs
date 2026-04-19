@@ -6,6 +6,6 @@
         public string Name { get; set; } = string.Empty;
         public string Group { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
-        public ICollection<Enroll> Enrollments { get; set; } = new List<Enroll>();
+        public ICollection<Enroll> Enrolls { get; set; } = new List<Enroll>();
     }
 }

@@ -8,6 +8,6 @@
         public int Credits { get; set; }
 
         // навигационное свойство (один курс может иметь много записей студентов)
-        public ICollection<Enroll> Enrollments { get; set; } = new List<Enroll>();
+        public ICollection<Enroll> Enrolls { get; set; } = new List<Enroll>();
     }
 }
