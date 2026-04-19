@@ -1,9 +1,10 @@
 ﻿using laba11.data;
 using laba11.Models;
+using laba11.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace lab11.controllers
+namespace laba11.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -47,33 +48,29 @@ namespace lab11.controllers
 
         // POST api/students — создать студента
         [HttpPost]
-        public async Task<ActionResult<Student>> Create([FromBody] Student student)
+        public async Task<ActionResult<Student>> Create([FromBody] CreateStudentDto dto)
         {
-            student.CreatedAt = DateTime.UtcNow;
-
-            // Add — добавляет сущность в контекст (состояние Added)
+            var student = new Student
+            {
+                Name = dto.Name,
+                Group = dto.Group,
+                CreatedAt = DateTime.UtcNow
+            };
             _context.Students.Add(student);
-            // SaveChangesAsync — генерирует INSERT и выполняет его в базе
             await _context.SaveChangesAsync();
-
             return CreatedAtAction(nameof(GetById), new { id = student.Id }, student);
         }
 
         // PUT api/students/{id} — обновить студента
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Student>> Update(int id, [FromBody] Student updated)
+        public async Task<ActionResult<Student>> Update(int id, [FromBody] CreateStudentDto dto)
         {
             var student = await _context.Students.FindAsync(id);
-
             if (student == null)
                 return NotFound(new { message = $"Студент с id={id} не найден" });
-
-            student.Name = updated.Name;
-            student.Group = updated.Group;
-
-            // EF Core отслеживает изменения — SaveChangesAsync сгенерирует UPDATE
+            student.Name = dto.Name;
+            student.Group = dto.Group;
             await _context.SaveChangesAsync();
-
             return Ok(student);
         }
 
