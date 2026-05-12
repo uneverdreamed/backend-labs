@@ -1,10 +1,124 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-</body>
-</html>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 22px;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.origin-info {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 16px;
+    margin: 20px 0 10px;
+    color: #34495e;
+}
+
+/* панель тестов */
+.test-panel {
+    background: white;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+    .test-panel h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
+
+.test-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    color: white;
+    transition: opacity 0.2s;
+}
+
+    button:hover {
+        opacity: 0.85;
+    }
+
+.btn-get {
+    background-color: #3498db;
+}
+
+.btn-post {
+    background-color: #27ae60;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+}
+
+/* блок результата */
+.result {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+    .result.show {
+        display: block;
+    }
+
+    .result.success {
+        background: #d5f5e3;
+        border: 1px solid #a9dfbf;
+        color: #1e8449;
+    }
+
+    .result.error {
+        background: #fadbd8;
+        border: 1px solid #f1948a;
+        color: #c0392b;
+    }
+
+    .result.blocked {
+        background: #fdebd0;
+        border: 1px solid #f0b27a;
+        color: #d35400;
+    }
+
+/* лог заголовков */
+.headers-log {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #666;
+}
