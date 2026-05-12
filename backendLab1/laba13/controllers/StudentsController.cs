@@ -1,10 +1,10 @@
-﻿using laba12.data;
-using laba12.DTOs;
-using laba12.models;
+﻿using laba13.data;
+using laba13.DTOs;
+using laba13.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace laba12.controllers
+namespace laba13.controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace laba12.controllers
+namespace laba13.controllers
 {
     // тестовый контроллер — намеренно выбрасывает исключения разных типов,
     // чтобы продемонстрировать работу GlobalExceptionMiddleware

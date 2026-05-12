@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace laba12.middleware
+namespace laba13.middleware
 {
     // middleware для глобальной обработки необработанных исключений
     // перехватывает любые ошибки, которые не были пойманы фильтрами или контроллерами,

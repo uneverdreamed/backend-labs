@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
-namespace laba12.filters
+namespace laba13.filters
 {
     // фильтр исключений перехватывает ошибки, возникающие при работе с базой данных
     // применяется к контроллерам через атрибут [ServiceFilter] или глобально

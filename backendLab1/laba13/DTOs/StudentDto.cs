@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace laba12.DTOs
+namespace laba13.DTOs
 {
     // DTO для создания/обновления студента — с атрибутами валидации для ModelState
     public class CreateStudentDto

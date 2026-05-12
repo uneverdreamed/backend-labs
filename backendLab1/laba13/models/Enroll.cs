@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace laba12.models
+namespace laba13.models
 {
     // связующая сущность: один студент — много курсов, один курс — много студентов
     public class Enroll

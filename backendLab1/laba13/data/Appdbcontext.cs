@@ -1,7 +1,7 @@
-﻿using laba12.models;
+﻿using laba13.models;
 using Microsoft.EntityFrameworkCore;
 
-namespace laba12.data
+namespace laba13.data
 {
     public class AppDbContext : DbContext
     {

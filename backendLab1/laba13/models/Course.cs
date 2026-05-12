@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace laba12.models
+namespace laba13.models
 {
     public class Course
     {

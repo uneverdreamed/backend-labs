@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace laba12.DTOs
+namespace laba13.DTOs
 {
     public class CreateEnrollDto
     {
