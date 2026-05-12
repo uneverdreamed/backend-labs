@@ -1,10 +1,83 @@
-// клиентское приложение Ч только раздаЄт статические файлы на порту 5001
-// нужно дл€ демонстрации кросс-доменных запросов:
-// клиент (порт 5001) обращаетс€ к API (порт 5000) Ч это разные origin
+using laba14.data;
+using laba14.filters;
+using laba14.middleware;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// регистраци€ контроллеров с глобальным фильтром ошибок Ѕƒ
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<DbExceptionFilter>();
+})
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler =
+        System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<DbExceptionFilter>();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// ===== Ќј—“–ќ… ј CORS =====
+// AddCors регистрирует сервис CORS в DI-контейнере
+// внутри определ€ютс€ именованные политики с разными уровн€ми доступа
+builder.Services.AddCors(options =>
+{
+    // ѕолитика 1: "AllowClient" Ч разрешает запросы только от нашего клиента (порт 5001)
+    // это основна€ рабоча€ политика дл€ фронтенда
+    options.AddPolicy("AllowClient", policy =>
+    {
+        policy.WithOrigins("http://localhost:5001")  // конкретный источник
+              .AllowAnyMethod()                       // разрешены все HTTP-методы (GET, POST, PUT, DELETE)
+              .AllowAnyHeader();                      // разрешены любые заголовки (Content-Type и др.)
+    });
+
+    // ѕолитика 2: "ReadOnly" Ч разрешает только чтение (GET) с любого источника
+    // пример ограничительной политики дл€ публичных данных
+    options.AddPolicy("ReadOnly", policy =>
+    {
+        policy.AllowAnyOrigin()                       // любой домен может обращатьс€
+              .WithMethods("GET")                     // но только методом GET
+              .AllowAnyHeader();
+    });
+
+    // ѕолитика 3: "AllowAll" Ч разрешает всЄ (дл€ разработки)
+    // небезопасна дл€ продакшена, но удобна при отладке
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
+app.UseMiddleware<GlobalExceptionMiddleware>();
+
+// автоматическое создание базы данных при старте
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.EnsureDeleted();
+    db.Database.EnsureCreated();
+}
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// UseCors подключает middleware обработки CORS-заголовков
+// "AllowClient" Ч политика по умолчанию, примен€етс€ ко всем эндпоинтам
+// на отдельных контроллерах/методах можно переопределить через атрибут [EnableCors("»м€ѕолитики")]
+app.UseCors("AllowClient");
+
+app.MapControllers();
 app.Run();
