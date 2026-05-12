@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лаба 14 — Тестирование CORS</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Тестирование CORS-политик</h1>
+    <p class="origin-info">
+        Клиент: <strong>http://localhost:5001</strong> → API: <strong>http://localhost:5000</strong>
+        (разные порты = разные origin = кросс-доменные запросы)
+    </p>
+
+    <!-- Тест 1: политика AllowClient — разрешено всё с localhost:5001 -->
+    <div class="test-panel">
+        <h3>1. Students — политика "AllowClient" (разрешён localhost:5001)</h3>
+        <p style="font-size:13px;color:#666;margin-bottom:8px;">
+            Все методы должны работать, потому что наш origin (5001) разрешён.
+        </p>
+        <div class="test-row">
+            <button class="btn-get" onclick="testStudentsGet()">GET /students</button>
+            <button class="btn-post" onclick="testStudentsPost()">POST /students</button>
+            <button class="btn-delete" onclick="testStudentsDelete()">DELETE /students/1</button>
+        </div>
+        <div id="result-students-get" class="result"></div>
+        <div id="result-students-post" class="result"></div>
+        <div id="result-students-delete" class="result"></div>
+    </div>
+
+    <!-- Тест 2: политика ReadOnly — только GET с любого домена -->
+    <div class="test-panel">
+        <h3>2. PublicCourses — политика "ReadOnly" (только GET с любого origin)</h3>
+        <p style="font-size:13px;color:#666;margin-bottom:8px;">
+            GET должен работать. POST будет заблокирован — политика разрешает только GET.
+        </p>
+        <div class="test-row">
+            <button class="btn-get" onclick="testPublicGet()">GET /publiccourses</button>
+            <button class="btn-post" onclick="testPublicPost()">POST /publiccourses</button>
+        </div>
+        <div id="result-public-get" class="result"></div>
+        <div id="result-public-post" class="result"></div>
+    </div>
+
+    <!-- Тест 3: [DisableCors] на отдельном методе -->
+    <div class="test-panel">
+        <h3>3. Courses — GET работает, DELETE отключён через [DisableCors]</h3>
+        <p style="font-size:13px;color:#666;margin-bottom:8px;">
+            GET пройдёт (политика по умолчанию). DELETE заблокирован атрибутом [DisableCors].
+        </p>
+        <div class="test-row">
+            <button class="btn-get" onclick="testCoursesGet()">GET /courses</button>
+            <button class="btn-delete" onclick="testCoursesDelete()">DELETE /courses/1</button>
+        </div>
+        <div id="result-courses-get" class="result"></div>
+        <div id="result-courses-delete" class="result"></div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
