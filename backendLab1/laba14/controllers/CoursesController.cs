@@ -1,10 +1,11 @@
-﻿using laba13.data;
-using laba13.DTOs;
-using laba13.models;
+﻿using laba14.data;
+using laba14.DTOs;
+using laba14.models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace laba13.controllers
+namespace laba14.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -74,8 +75,10 @@ namespace laba13.controllers
             return Ok(course);
         }
 
+        // [DisableCors] полностью отключает CORS для этого метода —
+        // кросс-доменный запрос на удаление будет заблокирован браузером
+        [DisableCors]
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
         {
             var course = await _context.Courses.FindAsync(id);
 
@@ -85,6 +88,6 @@ namespace laba13.controllers
             _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
             return NoContent();
-        }
+}
     }
 }
