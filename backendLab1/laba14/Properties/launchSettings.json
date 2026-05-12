@@ -1,10 +1,14 @@
-﻿// клиентское приложение — только раздаёт статические файлы на порту 5001
-// нужно для демонстрации кросс-доменных запросов:
-// клиент (порт 5001) обращается к API (порт 5000) — это разные origin
-
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-app.UseDefaultFiles();
-app.UseStaticFiles();
-app.Run();
+﻿{
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "",
+      "applicationUrl": "http://localhost:5001",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
