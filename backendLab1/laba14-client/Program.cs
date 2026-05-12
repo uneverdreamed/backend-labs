@@ -1,6 +1,10 @@
+// клиентское приложение — только раздаёт статические файлы на порту 5001
+// нужно для демонстрации кросс-доменных запросов:
+// клиент (порт 5001) обращается к API (порт 5000) — это разные origin
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
-
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.Run();
