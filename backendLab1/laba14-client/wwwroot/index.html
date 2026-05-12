@@ -15,9 +15,9 @@
 
     <!-- Тест 1: политика AllowClient — разрешено всё с localhost:5001 -->
     <div class="test-panel">
-        <h3>1. Students — политика "AllowClient" (разрешён localhost:5001)</h3>
+        <h3>1. Students - политика "AllowClient" (разрешён localhost:5001)</h3>
         <p style="font-size:13px;color:#666;margin-bottom:8px;">
-            Все методы должны работать, потому что наш origin (5001) разрешён.
+            Все методы должны работать, тк origin (5001) разрешён.
         </p>
         <div class="test-row">
             <button class="btn-get" onclick="testStudentsGet()">GET /students</button>
@@ -33,7 +33,7 @@
     <div class="test-panel">
         <h3>2. PublicCourses — политика "ReadOnly" (только GET с любого origin)</h3>
         <p style="font-size:13px;color:#666;margin-bottom:8px;">
-            GET должен работать. POST будет заблокирован — политика разрешает только GET.
+            GET должен работать. POST будет заблокирован, тк политика разрешает только GET.
         </p>
         <div class="test-row">
             <button class="btn-get" onclick="testPublicGet()">GET /publiccourses</button>
@@ -47,7 +47,7 @@
     <div class="test-panel">
         <h3>3. Courses — GET работает, DELETE отключён через [DisableCors]</h3>
         <p style="font-size:13px;color:#666;margin-bottom:8px;">
-            GET пройдёт (политика по умолчанию). DELETE заблокирован атрибутом [DisableCors].
+            GET должен работать. DELETE будет заблокирован атрибутом [DisableCors].
         </p>
         <div class="test-row">
             <button class="btn-get" onclick="testCoursesGet()">GET /courses</button>
