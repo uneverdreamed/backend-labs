@@ -1,13 +1,17 @@
-﻿using laba13.data;
-using laba13.DTOs;
-using laba13.models;
+﻿using laba14.data;
+using laba14.DTOs;
+using laba14.models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace laba13.controllers
+namespace laba14.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    // атрибут [EnableCors] переопределяет политику по умолчанию для всего контроллера
+    // "AllowClient" — разрешает запросы только с http://localhost:5001
+    [EnableCors("AllowClient")]
     public class StudentsController : ControllerBase
     {
         private readonly AppDbContext _context;

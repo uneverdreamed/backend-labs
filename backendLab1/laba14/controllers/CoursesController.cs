@@ -79,15 +79,18 @@ namespace laba14.controllers
         // кросс-доменный запрос на удаление будет заблокирован браузером
         [DisableCors]
         [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var course = await _context.Courses.FindAsync(id);
+            {
+                var course = await _context.Courses.FindAsync(id);
 
-            if (course == null)
-                return NotFound(new { error = $"Курс с id={id} не найден", statusCode = 404 });
+                if (course == null)
+                    return NotFound(new { error = $"Курс с id={id} не найден", statusCode = 404 });
 
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
-            return NoContent();
-}
+                _context.Courses.Remove(course);
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+        }
     }
 }
