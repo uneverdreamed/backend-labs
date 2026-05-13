@@ -11,10 +11,11 @@ async function sendRequest(url, method, body, resultId) {
 
     try {
         const options = {
-            method: method,
-            headers: { 'Content-Type': 'application/json' }
+            method: method
         };
+        // Content-Type нужен только для запросов с телом (POST, PUT)
         if (body) {
+            options.headers = { 'Content-Type': 'application/json' };
             options.body = JSON.stringify(body);
         }
 
