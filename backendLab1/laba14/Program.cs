@@ -41,9 +41,9 @@ builder.Services.AddCors(options =>
     // пример ограничительной политики для публичных данных
     options.AddPolicy("ReadOnly", policy =>
     {
-        policy.AllowAnyOrigin()                       // любой домен может обращаться
-              .WithMethods("GET")                     // но только методом GET
-              .AllowAnyHeader();
+        policy.AllowAnyOrigin()
+              .WithMethods("GET")
+              .WithHeaders("Accept");
     });
 
     // Политика 3: "AllowAll" — разрешает всё (для разработки)
