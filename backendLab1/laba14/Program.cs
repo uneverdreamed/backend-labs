@@ -42,8 +42,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("ReadOnly", policy =>
     {
         policy.AllowAnyOrigin()
-              .WithMethods("GET")
-              .AllowAnyHeader();
+              .WithMethods("GET");
     });
 
     // Политика 3: "AllowAll" — разрешает всё (для разработки)
