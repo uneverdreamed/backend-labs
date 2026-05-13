@@ -77,7 +77,7 @@ if (app.Environment.IsDevelopment())
 // UseCors подключает middleware обработки CORS-заголовков
 // "AllowClient" Ч политика по умолчанию, примен€етс€ ко всем эндпоинтам
 // на отдельных контроллерах/методах можно переопределить через атрибут [EnableCors("»м€ѕолитики")]
-app.UseCors("AllowClient");
+app.UseCors();
 
 app.MapControllers();
 app.Run();

@@ -9,6 +9,8 @@ namespace laba14.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowClient")]
+
     public class CoursesController : ControllerBase
     {
         private readonly AppDbContext _context;

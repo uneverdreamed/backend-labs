@@ -1,6 +1,7 @@
 ﻿using laba14.data;
 using laba14.DTOs;
 using laba14.models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,8 @@ namespace laba14.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowClient")]
+
     public class EnrollmentsController : ControllerBase
     {
         private readonly AppDbContext _context;
