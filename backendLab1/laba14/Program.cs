@@ -43,7 +43,7 @@ builder.Services.AddCors(options =>
     {
         policy.AllowAnyOrigin()
               .WithMethods("GET")
-              .WithHeaders("Accept");
+              .AllowAnyHeader();
     });
 
     // Политика 3: "AllowAll" — разрешает всё (для разработки)
