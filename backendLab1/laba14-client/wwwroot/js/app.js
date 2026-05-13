@@ -19,7 +19,12 @@ async function sendRequest(url, method, body, resultId) {
         }
 
         const response = await fetch(url, options);
-        const data = await response.json();
+
+        let data = null;
+        const text = await response.text();
+        if (text) {
+            data = JSON.parse(text);
+        }
 
         // собираем CORS-заголовки из ответа для отображения
         const corsHeaders = [];
