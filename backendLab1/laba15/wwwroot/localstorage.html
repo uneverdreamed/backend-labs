@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>localStorage</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>localStorage (клиент)</h1>
+        <a href="index.html" class="back">← На главную</a>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Сохранение в localStorage</h2>
+            <p>Данные сохраняются в браузере и переживают перезагрузку страницы и закрытие браузера. Срок жизни — пока пользователь не очистит данные сайта.</p>
+            <div class="form">
+                <input id="name" placeholder="Имя">
+                <input id="group" placeholder="Группа">
+                <button onclick="save()">Сохранить в localStorage</button>
+                <button onclick="read()">Прочитать localStorage</button>
+                <button onclick="clearData()">Удалить из localStorage</button>
+                <button onclick="syncWithServer()">Отправить на сервер</button>
+            </div>
+            <div id="result" class="result"></div>
+            <div id="serverResponse" class="result"></div>
+        </section>
+
+        <section class="card">
+            <h2>Автозагрузка</h2>
+            <p>При открытии страницы значения автоматически подгружаются из localStorage в поля ввода.</p>
+        </section>
+    </main>
+
+    <script src="js/localstorage.js"></script>
+</body>
+</html>
