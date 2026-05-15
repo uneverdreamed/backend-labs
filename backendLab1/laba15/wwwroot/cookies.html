@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Cookies</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Cookies (сервер)</h1>
+        <a href="index.html" class="back">← На главную</a>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Сохранение данных</h2>
+            <p>Сервер устанавливает cookie со сроком жизни 7 дней. Cookie помечена как HttpOnly и недоступна из JavaScript.</p>
+            <div class="form">
+                <input id="name" placeholder="Имя">
+                <input id="group" placeholder="Группа">
+                <button onclick="save()">Сохранить в cookie</button>
+                <button onclick="read()">Прочитать cookie</button>
+                <button onclick="clearData()">Удалить cookie</button>
+            </div>
+            <div id="result" class="result"></div>
+        </section>
+    </main>
+
+    <script src="js/cookies.js"></script>
+</body>
+</html>
