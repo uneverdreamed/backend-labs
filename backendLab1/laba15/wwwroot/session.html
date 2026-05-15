@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Серверные сессии</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Серверные сессии</h1>
+        <a href="index.html" class="back">← На главную</a>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Сохранение данных в сессию</h2>
+            <p>Данные хранятся на сервере, клиент получает только идентификатор сессии в cookie. Сессия живёт 30 минут с момента последней активности. Дополнительно сервер считает количество обращений к странице.</p>
+            <div class="form">
+                <input id="name" placeholder="Имя">
+                <input id="group" placeholder="Группа">
+                <button onclick="save()">Сохранить в сессию</button>
+                <button onclick="read()">Прочитать сессию</button>
+                <button onclick="clearData()">Очистить сессию</button>
+            </div>
+            <div id="result" class="result"></div>
+        </section>
+    </main>
+
+    <script src="js/session.js"></script>
+</body>
+</html>
