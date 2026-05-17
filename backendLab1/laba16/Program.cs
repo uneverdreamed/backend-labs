@@ -100,6 +100,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
+// Редирект с корня на Swagger UI
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
 // Порядок middleware важен: сначала аутентификация (кто это?), потом авторизация (что ему можно?)
 // Аутентификация читает токен из заголовка и заполняет HttpContext.User
