@@ -16,9 +16,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // чтение настроек JWT из appsettings.json в переменные
 // они нужны и при регистрации аутентификации, и при выдаче токена в контроллере
-var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
-var jwtAudience = builder.Configuration["Jwt:Audience"]!;
-var jwtKey = builder.Configuration["Jwt:Key"]!;
+var jwtIssuer = builder.Configuration["Jwt:Issuer"]
+    ?? throw new InvalidOperationException("Не задан Jwt:Issuer в appsettings.json");
+var jwtAudience = builder.Configuration["Jwt:Audience"]
+    ?? throw new InvalidOperationException("Не задан Jwt:Audience в appsettings.json");
+var jwtKey = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException("Не задан Jwt:Key в appsettings.json");
 
 // Регистрация схемы аутентификации JWT Bearer
 // AddAuthentication задаёт схему по умолчанию, которой будут пользоваться [Authorize]
